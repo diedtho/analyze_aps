@@ -1,7 +1,6 @@
 from pprint import pprint
-import pandas as pd
 
-from os_scandir_method import scan_directory_to_results_df
+from methods.os_scandir_method import scan_directory_to_results_df
 
 if __name__ == '__main__':
     path_string = "C:\\Users\\diede\\AppData\\Roaming\\Insomnia"
