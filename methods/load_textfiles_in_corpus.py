@@ -13,8 +13,11 @@ def file_to_text(filepath):
         except:
             return ""
     elif 'docx' in file_extension:
-        text = docx2txt.process(filepath)
-        return text
+        try:
+            text = docx2txt.process(filepath)
+            return text
+        except:
+            return ""
     elif file_extension in ['doc']:
         # implementation needed
         return ""
