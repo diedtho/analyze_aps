@@ -18,7 +18,5 @@ def get_dir_info_df(path_string, project_name='startfolder', data_folder='../dat
     return df_dir
 
 if __name__ == '__main__':
-    # path_string = "C:\\Users\\diede\\AppData\\Roaming\\Insomnia"  # home notebook win11
-    path_string = "/home/zarko/AAA_Projektarbeit/"  # home linux
-
-    get_dir_info_df(path_string)
+    path_string = "D:/"  # ComDev
+    get_dir_info_df(path_string, 'Drive_D')
