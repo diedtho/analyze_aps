@@ -11,12 +11,12 @@ def index_directory_subfolders(path_string):
             try:
                 index_result_dict_tmp = index_directory_subfolders(entry)
                 for key, val in index_result_dict_tmp.items():
+                    list_new_tmp = val.copy()
                     if key in index_result_dict.keys():
                         list_old_tmp = index_result_dict[key].copy()
-                        list_new_tmp = val.copy()
                         index_result_dict[key] = [*list_old_tmp, *list_new_tmp]
                     else:
-                        index_result_dict[key] = [*val.copy()]
+                        index_result_dict[key] = [*list_new_tmp]
             except:
                 pass
     return index_result_dict
