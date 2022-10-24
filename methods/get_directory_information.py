@@ -1,10 +1,13 @@
+import os
+
 from methods.folder_content_to_dataset import dir_df_to_dataset_csv
 from methods.os_scandir_method import scan_directory_to_results_df
 
 
 def get_dir_info_df(path_string, project_name='startfolder', data_folder='../data'):
     results_df = scan_directory_to_results_df(path_string)
-    csv_path = f'{data_folder}/{project_name}_content.csv'
+    csv_filename = project_name + '_folder_content.csv'
+    csv_path = os.path.join(data_folder, csv_filename)
     results_df.to_csv(csv_path, encoding='utf8', sep=';')
     dir_df_dict = dir_df_to_dataset_csv(csv_path)
     [df_dir, rootfolder_path] = [dir_df_dict['dataset_df'], dir_df_dict['rootfolder_pathstring']]
@@ -15,5 +18,7 @@ def get_dir_info_df(path_string, project_name='startfolder', data_folder='../dat
     return df_dir
 
 if __name__ == '__main__':
-    path_string = "C:\\Users\\diede\\AppData\\Roaming\\Insomnia"
+    # path_string = "C:\\Users\\diede\\AppData\\Roaming\\Insomnia"  # home notebook win11
+    path_string = "/home/zarko/AAA_Projektarbeit/"  # home linux
+
     get_dir_info_df(path_string)
