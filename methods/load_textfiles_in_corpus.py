@@ -6,7 +6,7 @@ from docx2txt import docx2txt
 def file_to_text(filepath):
     print(f'filepath={filepath}')
     file_extension = re.sub(r'.*\.([^.]+)$', r'\1', filepath)
-    if file_extension in ['txt', 'csv', 'log', 'md']:
+    if file_extension in ['txt', 'csv', 'log', 'md', 'ipynb']:
         try:
             with open(filepath, 'r') as fr:
                 text = fr.read()
