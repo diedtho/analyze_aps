@@ -1,6 +1,26 @@
 import os
 from pathlib import Path
 
+def index_directories_files(dir_list):
+    index_dict = {}
+    for dirpath in dir_list:
+        temp_index_dict = index_directory_files(dirpath)
+        for fname, fpath in temp_index_dict.items():
+            if fname not in index_dict.keys():
+                index_dict[fname] = [fpath]
+            else:
+                old_list = index_dict[fname].copy()
+                old_list.append(fpath)
+                index_dict[fname] = old_list
+    return index_dict
+
+def index_directory_files(path_string):
+    path = Path(path_string)
+    index_result_dict = {}
+    for entry in os.scandir(path):
+        if entry.is_file():
+            index_result_dict[entry.name] = str(entry.path)
+    return index_result_dict
 
 def index_directory_subfolders(path_string):
     path = Path(path_string)
@@ -40,6 +60,7 @@ class RootFolder:
         self.root_path = Path(path_string)
         self.folderpathes_dict = {}
         self.folderindices_dict = {}
+        self.fileindices_dict = {}
 
     def get_subfolders(self):
         if len(self.folderpathes_dict) == 0:
@@ -51,10 +72,10 @@ class RootFolder:
             self.folderindices_dict = index_directory_subfolders(self.root_path)
         return self.folderindices_dict
 
-    def get_foldercontent(self, foldername):
-        folders_content_dict = {}
-        if foldername in self.folderindices_dict.keys():
-            folders_list = self.folderindices_dict[foldername]
-            for folder in folders_list:
-                folders_content_dict[folder] = '+content'
-        return folders_content_dict
+    def get_fileindices(self):
+        if len(self.folderpathes_dict) == 0:
+            self.folderpathes_dict = scan_directory_subfolders(self.root_path)
+        if len(self.fileindices_dict) == 0:
+            folderpathes_list = list(self.folderpathes_dict.keys())
+            self.fileindices_dict = index_directories_files(folderpathes_list)
+        return self.fileindices_dict
