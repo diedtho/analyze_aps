@@ -11,3 +11,10 @@ print('=' * 111)
 subfolder_indices = rootdir.get_folderindices()
 for index, list in subfolder_indices.items():
     print(index, list)
+
+# foldername to content
+foldername = 'formsets'
+print(f"\n\nContent of '{foldername}'")
+content_dict = rootdir.get_foldercontent(foldername)
+for folder, content in content_dict.items():
+    print(folder, content)

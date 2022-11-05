@@ -50,3 +50,11 @@ class RootFolder:
         if len(self.folderindices_dict) == 0:
             self.folderindices_dict = index_directory_subfolders(self.root_path)
         return self.folderindices_dict
+
+    def get_foldercontent(self, foldername):
+        folders_content_dict = {}
+        if foldername in self.folderindices_dict.keys():
+            folders_list = self.folderindices_dict[foldername]
+            for folder in folders_list:
+                folders_content_dict[folder] = '+content'
+        return folders_content_dict
